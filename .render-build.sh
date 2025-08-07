@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-# Install Chromium
+# Update package list
 apt-get update
+
+# Install Chromium and Chromedriver
 apt-get install -y chromium-browser chromium-driver
 
-# Give execution permission to Chrome and chromedriver
+# Permissions (just in case)
 chmod +x /usr/bin/chromium-browser
 chmod +x /usr/lib/chromium-browser/chromedriver
