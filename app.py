@@ -1,7 +1,7 @@
 # app.py
 import streamlit as st
 
-PASSWORD = st.secrets["BOBTAIL"]
+PASSWORD = st.secrets["APP_PASSWORD"]
 
 def check_password():
     if "authenticated" not in st.session_state:
