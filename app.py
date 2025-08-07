@@ -1,10 +1,14 @@
 # app.py
 import streamlit as st
+import os
 
-PASSWORD = st.secrets["APP_PASSWORD"]
+PASSWORD = os.environ["APP_PASSWORD"]
 
 def check_password():
     if "authenticated" not in st.session_state:
+        st.session_state.authenticated = False
+
+    if not st.session_state.authenticated:
         password = st.text_input("Enter password:", type="password")
         if password == PASSWORD:
             st.session_state.authenticated = True
