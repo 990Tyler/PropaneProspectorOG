@@ -1,5 +1,18 @@
 # app.py
 import streamlit as st
+
+PASSWORD = st.secrets["BOBTAIL"]
+
+def check_password():
+    if "authenticated" not in st.session_state:
+        password = st.text_input("Enter password:", type="password")
+        if password == PASSWORD:
+            st.session_state.authenticated = True
+        else:
+            st.stop()
+
+check_password()
+
 import pandas as pd
 from buffalo_scraper import extract_BUFFALO_permits
 from trempealeau_scraper import extract_TREMPEALEAU_permits
