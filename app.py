@@ -1,22 +1,6 @@
 # app.py
 import streamlit as st
 import os
-
-PASSWORD = os.environ["APP_PASSWORD"]
-
-def check_password():
-    if "authenticated" not in st.session_state:
-        st.session_state.authenticated = False
-
-    if not st.session_state.authenticated:
-        password = st.text_input("Enter password:", type="password")
-        if password == PASSWORD:
-            st.session_state.authenticated = True
-        else:
-            st.stop()
-
-check_password()
-
 import pandas as pd
 from buffalo_scraper import extract_BUFFALO_permits
 from trempealeau_scraper import extract_TREMPEALEAU_permits
