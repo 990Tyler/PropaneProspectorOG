@@ -3,12 +3,24 @@
 import time
 import pandas as pd
 import requests
+
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+
+options = Options()
+options.add_argument("--headless")
+options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--no-sandbox")
+options.binary_location = "/usr/bin/chromium-browser"
+
+service = Service("/usr/lib/chromium-browser/chromedriver")
+
+driver = webdriver.Chrome(service=service, options=options)
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import StaleElementReferenceException
 from webdriver_manager.chrome import ChromeDriverManager
 
