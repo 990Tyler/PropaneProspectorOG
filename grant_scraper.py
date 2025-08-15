@@ -13,9 +13,16 @@ from selenium.common.exceptions import StaleElementReferenceException
 from webdriver_manager.chrome import ChromeDriverManager
 
 def extract_GRANT_permits(year):
+        
     options = Options()
-    # options.add_argument("--headless=new")
+    options.add_argument("--headless")  # Run Chrome in headless mode
+    options.add_argument("--no-sandbox")  # Required for Docker
+    options.add_argument("--disable-dev-shm-usage")  # Prevents shared memory issues
+    options.add_argument("--disable-gpu")  # Optional but recommended
+    options.add_argument("--remote-debugging-port=9222")  # Fixes DevToolsActivePort issue
+
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
     wait = WebDriverWait(driver, 15)
 
     try:

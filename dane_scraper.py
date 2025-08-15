@@ -10,9 +10,16 @@ from address_parser import parse_address
 def automate_dane_address_search(file, column_name):
     df = pd.read_excel(file)
 
+    
     options = Options()
-    options.add_argument('--start-maximized')
-    driver = webdriver.Chrome(options=options)
+    options.add_argument("--headless")  # Run Chrome in headless mode
+    options.add_argument("--no-sandbox")  # Required for Docker
+    options.add_argument("--disable-dev-shm-usage")  # Prevents shared memory issues
+    options.add_argument("--disable-gpu")  # Optional but recommended
+    options.add_argument("--remote-debugging-port=9222")  # Fixes DevToolsActivePort issue
+
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
 
     try:
         for _, row in df.iterrows():
